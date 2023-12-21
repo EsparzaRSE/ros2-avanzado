@@ -1,6 +1,6 @@
 # Carpeta templates 
 
-Este directorio contiene plantillas que pueden ser utilizadas para crear diferentes componentes en ROS2 (Robot Operating System). Tanto CMakeList.txt como package.xml también se pueden consultar para saber cómo configurar estos archivos para compilar el paquete.
+Esta carpeta contiene plantillas que pueden ser utilizadas para crear diferentes componentes en ROS2. Los ficheros CMakeLists.txt y package.xml de la carpeta actions_cpp se pueden consultar para saber cómo configurar estos archivos para compilar el paquete.
 
 ## actions_cpp
 
