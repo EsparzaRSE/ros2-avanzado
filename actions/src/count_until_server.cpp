@@ -3,8 +3,10 @@
 rclcpp_action::GoalResponse CountUntilServerNode::goal_callback(const rclcpp_action::GoalUUID &uuid,
                                                   std::shared_ptr<const my_robot_interfaces::action::CountUntil::Goal> goal){
     (void)uuid;
-    (void)goal;
-
+    RCLCPP_INFO(get_logger(), "Received a goal");
+    
+    if(goal->target_number < 0) return rclcpp_action::GoalResponse::REJECT;
+    
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
 }
 

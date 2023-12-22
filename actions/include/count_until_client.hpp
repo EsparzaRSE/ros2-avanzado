@@ -18,7 +18,6 @@ class CountUntilClientNode : public rclcpp::Node{
 
         void send_goal(int target_number, double period);
 
-
     private:
         rclcpp_action::Client<CountUntil>::SharedPtr count_until_client_{};
         void goal_result_callback(const rclcpp_action::ClientGoalHandle<CountUntil>::WrappedResult &result);    
