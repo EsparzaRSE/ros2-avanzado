@@ -5,9 +5,9 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
-#include "my_robot_interfaces/action/count_until.hpp"
+#include "my_robot_advanced_interfaces/action/count_until.hpp"
 
-using CountUntil = my_robot_interfaces::action::CountUntil;
+using CountUntil = my_robot_advanced_interfaces::action::CountUntil;
 
 class CountUntilClientNode : public rclcpp::Node{
 

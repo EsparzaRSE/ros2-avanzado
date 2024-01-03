@@ -5,9 +5,9 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
-#include "my_robot_interfaces/action/count_until.hpp"
+#include "my_robot_advanced_interfaces/action/count_until.hpp"
 
-using CountUntil = my_robot_interfaces::action::CountUntil;
+using CountUntil = my_robot_advanced_interfaces::action::CountUntil;
 
 class CountUntilClientNode : public rclcpp::Node{
 
@@ -20,7 +20,14 @@ class CountUntilClientNode : public rclcpp::Node{
 
     private:
         rclcpp_action::Client<CountUntil>::SharedPtr count_until_client_{};
-        void goal_result_callback(const rclcpp_action::ClientGoalHandle<CountUntil>::WrappedResult &result);    
+        void goal_response_callback(const rclcpp_action::ClientGoalHandle<CountUntil>::SharedPtr &goal_handle);
+        void goal_result_callback(const rclcpp_action::ClientGoalHandle<CountUntil>::WrappedResult &result); 
+        void goal_feedback_callback(const rclcpp_action::ClientGoalHandle<CountUntil>::SharedPtr &goal_handle,
+                                    const std::shared_ptr<const CountUntil::Feedback> feedback); 
+        // para probar si funciona al cancelar la acción 
+        rclcpp::TimerBase::SharedPtr timer_{};
+        rclcpp_action::ClientGoalHandle<CountUntil>::SharedPtr goal_handle_{};          
+        void timer_callback();
 };
 
 #endif

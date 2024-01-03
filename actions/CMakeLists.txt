@@ -9,7 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
-find_package(my_robot_interfaces REQUIRED)
+find_package(my_robot_advanced_interfaces REQUIRED)
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -17,10 +17,10 @@ include_directories(
 
 # crear el ejecutable e instalar el nodo
 add_executable(count_until_server src/count_until_server.cpp)
-ament_target_dependencies(count_until_server rclcpp my_robot_interfaces rclcpp_action)
+ament_target_dependencies(count_until_server rclcpp my_robot_advanced_interfaces rclcpp_action)
 
 add_executable(count_until_client src/count_until_client.cpp)
-ament_target_dependencies(count_until_client rclcpp my_robot_interfaces rclcpp_action)
+ament_target_dependencies(count_until_client rclcpp my_robot_advanced_interfaces rclcpp_action)
 
 install(TARGETS 
   count_until_server
