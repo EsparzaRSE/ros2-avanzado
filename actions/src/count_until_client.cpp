@@ -19,7 +19,7 @@ void CountUntilClientNode::send_goal(int target_number, double period){
     // Send the goal
     RCLCPP_INFO(get_logger(), "Sending a goal");
     count_until_client_->async_send_goal(goal, options);
-    timer_ = create_wall_timer(std::chrono::seconds(2), std::bind(&CountUntilClientNode::timer_callback, this));
+    //timer_ = create_wall_timer(std::chrono::seconds(2), std::bind(&CountUntilClientNode::timer_callback, this));
 }
 
 void CountUntilClientNode::goal_response_callback(const rclcpp_action::ClientGoalHandle<CountUntil>::SharedPtr &goal_handle){
