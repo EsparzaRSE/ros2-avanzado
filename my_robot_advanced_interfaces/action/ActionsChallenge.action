@@ -1,0 +1,10 @@
+# Goal
+int16 posicion
+int16 velocidad
+---
+# Result
+int16 posicion
+string mensaje
+---
+# Feedback
+int16 posicion_actual
