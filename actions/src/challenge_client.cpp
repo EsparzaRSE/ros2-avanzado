@@ -17,7 +17,7 @@ void ChallengeClientNode::send_goal(int posicion, int velocidad){
     options.feedback_callback = std::bind(&ChallengeClientNode::goal_feedback_callback, this, std::placeholders::_1, std::placeholders::_2);
 
     // Send the goal
-    RCLCPP_INFO(get_logger(), "Sending a goal");
+    RCLCPP_INFO(get_logger(), "Enviado el objetivo con posición: %d y velocidad %d", posicion, velocidad);
     challenge_client_->async_send_goal(goal, options);
 }
 
@@ -62,11 +62,12 @@ void ChallengeClientNode::goal_feedback_callback(const rclcpp_action::ClientGoal
     RCLCPP_INFO(get_logger(), "Got feedback: %d", posicion_actual);
 
 }
+
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
     auto node = std::make_shared<ChallengeClientNode>();
-    node->send_goal(20, 7);
+    node->send_goal(21, 9);
     rclcpp::spin(node);
     rclcpp::shutdown();
     return 0;

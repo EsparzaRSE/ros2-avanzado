@@ -12,12 +12,15 @@ using Challenge = my_robot_advanced_interfaces::action::ActionsChallenge;
 class ChallengeServerNode : public rclcpp::Node{
 
     public:
-        ChallengeServerNode() : Node("challenge_server"), posicion{50}{           
+        ChallengeServerNode() : Node("challenge_server"), posicion{50}{   
+            cb_group_ = create_callback_group(rclcpp::CallbackGroupType::Reentrant);        
             challenge_server_ = rclcpp_action::create_server<Challenge>(
                 this, "actions_challenge",
                 std::bind(&ChallengeServerNode::goal_callback, this, std::placeholders::_1, std::placeholders::_2),
                 std::bind(&ChallengeServerNode::cancel_callback, this, std::placeholders::_1),
-                std::bind(&ChallengeServerNode::handle_accepted_callback, this, std::placeholders::_1));
+                std::bind(&ChallengeServerNode::handle_accepted_callback, this, std::placeholders::_1),
+                rcl_action_server_get_default_options(),
+                cb_group_);
             RCLCPP_INFO(get_logger(), "Action server has been started");
             RCLCPP_INFO(get_logger(), "Posición inicial del robot: %d", posicion);
         }
@@ -26,6 +29,9 @@ class ChallengeServerNode : public rclcpp::Node{
         int posicion{};
         rclcpp_action::Server<Challenge>::SharedPtr challenge_server_{};
         std::shared_ptr<rclcpp_action::ServerGoalHandle<Challenge>> goal_handle_{};
+        rclcpp::CallbackGroup::SharedPtr cb_group_{};
+        std::mutex mutex_{};
+        rclcpp_action::GoalUUID preempted_goal_id_{};
         rclcpp_action::GoalResponse goal_callback(const rclcpp_action::GoalUUID &uuid,
                                                   std::shared_ptr<const Challenge::Goal> goal);
         rclcpp_action::CancelResponse cancel_callback(const std::shared_ptr<rclcpp_action::ServerGoalHandle<Challenge>> goal_handle);
