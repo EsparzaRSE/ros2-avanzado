@@ -63,11 +63,21 @@ void ChallengeClientNode::goal_feedback_callback(const rclcpp_action::ClientGoal
 
 }
 
+void ChallengeClientNode::send_cancel_goal(const my_robot_advanced_interfaces::msg::CancelMoveChallenge msg){
+
+    bool cancelar{msg.cancelar_movimiento};
+
+    if(cancelar){
+        RCLCPP_INFO(get_logger(), "Cancel the goal");
+        challenge_client_->async_cancel_goal(goal_handle_);
+    }
+}
+
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
     auto node = std::make_shared<ChallengeClientNode>();
-    node->send_goal(21, 9);
+    node->send_goal(21, 2);
     rclcpp::spin(node);
     rclcpp::shutdown();
     return 0;

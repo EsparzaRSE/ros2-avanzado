@@ -68,6 +68,13 @@ void ChallengeServerNode::execute_goal(const std::shared_ptr<rclcpp_action::Serv
             }
         }
 
+        if(goal_handle->is_canceling()){
+            result->posicion = posicion;
+            result->mensaje = "Movimiento cancelado";
+            goal_handle->canceled(result);
+            return;
+        }
+        
         if (std::abs(posicion_objetivo - posicion) < velocidad) {
             posicion = posicion_objetivo;
         }
