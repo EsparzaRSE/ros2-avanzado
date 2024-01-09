@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="lifecycle_cpp" exec="lifecycle_challenge_server" name="lifecycle_servidor_1">
+        <param name="nombre_accion_servidor" value="servidor_accion_1"/>
+        <param name="posicion" value="30"/>
+    </node>
+
+    <node pkg="lifecycle_cpp" exec="lifecycle_challenge_server" name="lifecycle_servidor_2">
+        <param name="nombre_accion_servidor" value="servidor_accion_2"/>
+        <param name="posicion" value="76"/>
+    </node>
+</launch>
